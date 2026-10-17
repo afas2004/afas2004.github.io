@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Games · efoc.party</title>
+<meta name="description" content="Small games you can play in the browser: Soulward and Tidekin.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow column; each game is a row you tap, like a cartridge shelf. */
+:root{
+  --bg:#F1EFF6; --surface:#FFFFFF; --ink:#17142A; --muted:#5E5A78; --rule:#D9D5E6; --accent:#5B3FD6;
+  --ember:#C9771E; --shield:#2F5BEA;
+  --display:"Familjen Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0E0C18;--surface:#17142A;--ink:#ECEAF7;--muted:#9E9AB8;--rule:#2B2742;--accent:#A895FF;--ember:#F2B25E;--shield:#8CA7FF;color-scheme:dark}
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding-inline:20px;padding-block:calc(48px + env(safe-area-inset-top,0px)) calc(48px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:32px}
+.host{margin:0;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted)}
+h1{margin:6px 0 8px;font-size:clamp(2.2rem,8vw,3.2rem);font-weight:700;line-height:1;letter-spacing:-.03em}
+.lede{margin:0;color:var(--muted);max-width:44ch}
+.shelf{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.game{display:grid;grid-template-columns:56px minmax(0,1fr) auto;align-items:center;gap:16px;padding:16px;border-radius:14px;background:var(--surface);border:1px solid var(--rule);color:inherit;text-decoration:none;transition:border-color .15s,transform .15s}
+.game:hover{border-color:var(--accent)}
+.game:active{transform:scale(.99)}
+.game:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.mark{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font-family:var(--mono);font-size:22px;font-weight:500}
+.mark.soul{background:color-mix(in srgb,var(--ember) 16%,transparent);color:var(--ember)}
+.mark.tide{background:color-mix(in srgb,var(--shield) 16%,transparent);color:var(--shield)}
+.info{min-width:0;display:flex;flex-direction:column;gap:2px}
+.name{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.desc{color:var(--muted);font-size:15px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.go{font-size:22px;color:var(--muted)}
+.game:hover .go{color:var(--accent)}
+footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.game{transition:none}.game:active{transform:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <p class="host">games.efoc.party</p>
+    <h1>Games</h1>
+    <p class="lede">Small games that run in your browser, on your phone or a computer.</p>
+  </header>
+
+  <ul class="shelf">
+    <li>
+      <a class="game" href="soulward/">
+        <span class="mark soul" aria-hidden="true">S</span>
+        <span class="info">
+          <span class="name">Soulward</span>
+          <span class="desc">Type each falling word before it breaks your ward.</span>
+          <span class="tag">Playable · 3 paths · bosses</span>
+        </span>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+    </li>
+    <li>
+      <a class="game" href="tidekin/">
+        <span class="mark tide" aria-hidden="true">T</span>
+        <span class="info">
+          <span class="name">Tidekin</span>
+          <span class="desc">A small luck game about an ecosystem of shoreline species.</span>
+          <span class="tag">Playable · RNG</span>
+        </span>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer>Scores are saved in your own browser.</footer>
+</main>
+</body>
+</html>
