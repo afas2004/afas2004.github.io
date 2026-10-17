@@ -4,230 +4,180 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Games by Fahmi</title>
-<meta name="description" content="A portfolio of small browser games by Fahmi: Soulward, Fatil and Tidekin.">
+<meta name="description" content="Three small games you can play in your browser: Soulward, Fatil and Tidekin.">
 <meta property="og:title" content="Games by Fahmi">
-<meta property="og:description" content="Soulward, Fatil and Tidekin. Small games that run in your browser.">
+<meta property="og:description" content="Soulward, Fatil and Tidekin. Tap one and play.">
 <meta property="og:image" content="https://games.efoc.party/shots/soulward-home.webp">
+<meta name="theme-color" content="#FFD24D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap">
 <style>
-/* Layout: a catalogue of works. Each game is one entry: text and a spec sheet on the left,
-   a strip of phone screenshots on the right; the strip opens into a full-size viewer. */
+/* Layout: one screen. A sunny shelf with three chunky game cards in a row (a swipe row on phones).
+   Each card wears its own game's colours: a screenshot slideshow on top, a short line and Play below. */
 :root{
-  --bg:#F5F6F8; --paper:#FFFFFF; --ink:#12141B; --muted:#5A5F6E; --rule:#DADDE4; --accent:#1F3FA8;
-  --shot-bg:#E9EBF0;
-  --sans:"Schibsted Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --sun:#FFD24D; --sun-dot:#FFC12E; --ink:#2B1A0C; --ink-soft:#6B4A1E;
+  --soul-bg:#3A1E2E; --soul-hi:#FFB547; --soul-ink:#FFF1DC;
+  --fatil-bg:#2C2F94; --fatil-hi:#F7C948; --fatil-ink:#F4F1FF;
+  --tide-bg:#0E6467; --tide-hi:#FF8A6B; --tide-ink:#E9FFFB;
+  --display:"Fredoka","Baloo 2",ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Nunito",ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;
   color-scheme:light;
 }
-@media (prefers-color-scheme: dark){
-  :root{--bg:#0D0F14;--paper:#14171F;--ink:#E8EAF0;--muted:#9AA0B0;--rule:#262A35;--accent:#9DB2FF;--shot-bg:#1A1E28;color-scheme:dark}
-}
 *{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+html,body{margin:0;height:100%}
+body{background-color:var(--sun);background-image:radial-gradient(var(--sun-dot) 2.2px,transparent 2.6px);background-size:26px 26px;
+  color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
+.page{min-height:100%;height:100dvh;min-height:560px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:clamp(12px,2.4vh,24px);
+  padding-inline:clamp(16px,3vw,40px);padding-block:calc(clamp(14px,3vh,32px) + env(safe-area-inset-top,0px)) calc(12px + env(safe-area-inset-bottom,0px));
+  max-width:1240px;margin:0 auto}
 
-/* masthead */
-.mast{padding-block:calc(56px + env(safe-area-inset-top,0px)) 40px}
-main .work:first-child{border-top:1px solid var(--rule)}
-.mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
-h1{margin:40px 0 12px;font-size:clamp(2.4rem,6vw,4rem);font-weight:600;line-height:1.02;letter-spacing:-.035em;text-wrap:balance}
-.intro{margin:0;max-width:58ch;font-size:18px;color:var(--muted)}
-.index{list-style:none;margin:32px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 28px;font-size:15px}
-.index a{text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:2px}
-.index a:hover{border-color:var(--accent);color:var(--accent)}
-.index span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:6px}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 24px;flex-wrap:wrap}
+h1{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,min(5vh,8.4vw),3.4rem);line-height:1;letter-spacing:-.01em;white-space:nowrap}
+h1 .wave{display:inline-block;transform-origin:70% 70%;animation:wave 2.6s ease-in-out 1s 2}
+@keyframes wave{0%,60%,100%{transform:rotate(0)}10%,30%{transform:rotate(14deg)}20%,40%{transform:rotate(-8deg)}}
+.swipe{display:none;margin:6px 0 0;font-weight:800;font-size:12px;color:var(--ink-soft)}
+.sub{margin:6px 0 0;font-weight:700;font-size:clamp(14px,2vh,17px);color:var(--ink-soft)}
 
-/* one entry per game */
-.work{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:clamp(24px,5vw,64px);padding-block:56px;border-bottom:1px solid var(--rule);scroll-margin-top:16px}
-.about{display:flex;flex-direction:column;gap:18px;min-width:0}
-.kind{margin:0;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-h2{margin:-8px 0 0;font-size:clamp(1.9rem,3.6vw,2.5rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-h2 .ar{font-family:"Noto Naskh Arabic","Geeza Pro","Segoe UI",serif;font-weight:500;font-size:.8em;color:var(--muted);letter-spacing:0}
-.lead{margin:0;font-size:18px;line-height:1.5}
-.body{margin:0;color:var(--muted);max-width:60ch}
-.spec{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);border-top:1px solid var(--rule)}
-.spec dt,.spec dd{margin:0;padding:9px 0;border-bottom:1px solid var(--rule);font-size:14px}
-.spec dt{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-right:20px;padding-top:11px}
-.actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.play{display:inline-flex;align-items:center;gap:10px;padding:11px 20px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:600;text-decoration:none;font-size:15px;transition:background .15s}
-.play:hover{background:var(--accent)}
-.url{font-family:var(--mono);font-size:12px;color:var(--muted)}
+/* the shelf */
+.shelf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.2vw,28px);min-height:0}
+.card{--bg:#333;--hi:#fff;--fg:#fff;position:relative;display:flex;flex-direction:column;gap:clamp(10px,1.6vh,16px);min-height:0;
+  background:var(--bg);color:var(--fg);border-radius:30px;padding:clamp(12px,1.8vh,18px) clamp(12px,1.8vh,18px) clamp(14px,2.2vh,22px);
+  box-shadow:0 10px 0 rgba(43,26,12,.28),0 18px 30px rgba(43,26,12,.18);transform:rotate(var(--tilt,0deg));transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.card:hover{transform:rotate(0) translateY(-6px)}
+.card.soul{--bg:var(--soul-bg);--hi:var(--soul-hi);--fg:var(--soul-ink);--tilt:-1.4deg}
+.card.fatil{--bg:var(--fatil-bg);--hi:var(--fatil-hi);--fg:var(--fatil-ink);--tilt:.9deg}
+.card.tide{--bg:var(--tide-bg);--hi:var(--tide-hi);--fg:var(--tide-ink);--tilt:-.7deg}
 
-/* screenshot strip */
-.gallery{min-width:0;display:flex;flex-direction:column;gap:10px}
-.strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin;overscroll-behavior-x:contain}
-.shot{flex:none;scroll-snap-align:start;margin:0;display:flex;flex-direction:column;gap:8px}
-.shot button{all:unset;cursor:zoom-in;display:block;border-radius:18px;overflow:hidden;background:var(--shot-bg);border:1px solid var(--rule);height:min(340px,62vw);transition:transform .2s,border-color .2s}
-.shot button:hover{border-color:var(--accent)}
-.shot button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.shot img{display:block;height:100%;width:auto;max-width:none}
-.shot figcaption{font-size:13px;color:var(--muted);max-width:30ch}
-.hint{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+.shots{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.frame{all:unset;position:relative;flex:1;min-height:0;height:100%;max-width:100%;aspect-ratio:var(--ar,780/1688);border-radius:22px;overflow:hidden;cursor:pointer;
+  background:rgba(0,0,0,.35);box-shadow:0 0 0 4px rgba(255,255,255,.12)}
+.frame:focus-visible{outline:3px solid var(--hi);outline-offset:3px}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .6s ease}
+.frame img.fit{object-fit:contain;object-position:center}
+.frame img.on{opacity:1}
+.dots{display:flex;gap:7px}
+.dots button{all:unset;cursor:pointer;width:9px;height:9px;border-radius:99px;background:currentColor;opacity:.35;transition:width .25s,opacity .25s}
+.dots button[aria-current="true"]{width:22px;opacity:1;background:var(--hi)}
+.dots button:focus-visible{outline:2px solid var(--hi);outline-offset:3px}
 
-footer{padding-block:40px calc(48px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.info{display:flex;flex-direction:column;gap:6px;padding-inline:4px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+h2{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(1.4rem,3.2vh,2rem);line-height:1.05;display:flex;align-items:baseline;gap:8px}
+h2 .ar{font-family:"Noto Naskh Arabic","Geeza Pro","Segoe UI",serif;font-size:.78em;opacity:.8}
+.tag{flex:none;font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:color-mix(in srgb,var(--hi) 22%,transparent);color:var(--hi)}
+.line{margin:0;font-weight:600;font-size:clamp(14px,1.9vh,16px);line-height:1.4;opacity:.92}
+.play{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;min-height:46px;border-radius:16px;background:var(--hi);color:var(--bg);
+  font-family:var(--display);font-weight:600;font-size:18px;text-decoration:none;box-shadow:0 5px 0 rgba(0,0,0,.35);transition:transform .1s,box-shadow .1s}
+.play:hover{filter:brightness(1.06)}
+.play:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.35)}
+.play:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
 
-/* full-size viewer */
-dialog.viewer{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100vw;height:100vh;color:#EEF0F5}
-dialog.viewer::backdrop{background:rgba(6,7,10,.9)}
-.v-inner{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:12px;padding:calc(14px + env(safe-area-inset-top,0px)) 16px calc(18px + env(safe-area-inset-bottom,0px))}
-.v-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:#A8AEBF}
-.v-stage{display:flex;align-items:center;justify-content:center;gap:12px;min-height:0}
-.v-stage img{max-height:100%;max-width:min(100%,900px);height:auto;width:auto;border-radius:16px;object-fit:contain}
-.v-cap{text-align:center;font-size:15px;color:#D6D9E3;margin:0}
-.v-btn{all:unset;cursor:pointer;width:44px;height:44px;flex:none;display:grid;place-items:center;border-radius:999px;background:rgba(255,255,255,.08);color:#EEF0F5;font-size:20px}
-.v-btn:hover{background:rgba(255,255,255,.16)}
-.v-btn:focus-visible{outline:2px solid #9DB2FF;outline-offset:2px}
+footer{text-align:center;font-weight:700;font-size:13px;color:var(--ink-soft)}
+footer a{color:inherit}
 
-@media (max-width:820px){
-  .work{grid-template-columns:minmax(0,1fr);padding-block:44px}
-  .gallery{margin-inline:calc(-1 * clamp(16px,4vw,40px))}
-  .strip{padding-inline:clamp(16px,4vw,40px);scroll-padding-inline:clamp(16px,4vw,40px)}
-  .gallery .hint{padding-inline:clamp(16px,4vw,40px)}
-  .shot button{height:min(380px,92vw)}
-  .v-stage .v-btn{display:none}
+/* phones: the three cards become a swipe row, still one screen tall */
+@media (max-width:760px){
+  .page{padding-inline:0;gap:14px}
+  header,footer{padding-inline:20px}
+  .shelf{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:80%;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:6px 20px 16px;scroll-padding-inline:20px;scrollbar-width:none}
+  .shelf::-webkit-scrollbar{display:none}
+  .card{scroll-snap-align:center}
+  .swipe{display:block}
 }
-@media (prefers-reduced-motion:reduce){.shot button,.play{transition:none}.strip{scroll-behavior:auto}}
+@media (max-height:620px) and (min-width:761px){ .line{display:none} }
+@media (prefers-reduced-motion:reduce){
+  .card,.card:hover{transform:none;transition:none}
+  h1 .wave{animation:none}
+  .frame img{transition:none}
+}
 </style>
 </head>
 <body>
-<header class="mast wrap">
-  <div class="mast-top"><span>games.efoc.party</span><span>Portfolio · 2026</span></div>
-  <h1>Games by Fahmi</h1>
-  <p class="intro">Small games built for the browser. Each one is a single page that runs on a phone with on-screen controls or on a computer with a keyboard, with nothing to install.</p>
-  <ul class="index">
-    <li><a href="#soulward">Soulward</a><span>Typing defense</span></li>
-    <li><a href="#fatil">Fatil</a><span>Arabic word game</span></li>
-    <li><a href="#tidekin">Tidekin</a><span>Shared ecosystem</span></li>
-  </ul>
-</header>
-
-<main class="wrap">
-  <article class="work" id="soulward">
-    <div class="about">
-      <p class="kind">Typing defense</p>
-      <h2>Soulward</h2>
-      <p class="lead">Type each falling word before it breaks your ward.</p>
-      <p class="body">Every word you type becomes a stone in your wall, and a typo breaks the newest one. Every fifteen words a boss arrives with its own attack, such as darkness that comes in waves, mirrored words or frozen letters. You survive its attack, then strike its weak point.</p>
-      <dl class="spec">
-        <dt>Modes</dt><dd>Pilgrim, Knight and Ashen paths, each with its own best score</dd>
-        <dt>Input</dt><dd>On-screen keys or your device keyboard</dd>
-        <dt>Language</dt><dd>English and Bahasa Melayu</dd>
-        <dt>Extras</dt><dd>Bosses, word codex, event mode with a leaderboard</dd>
-      </dl>
-      <div class="actions"><a class="play" href="soulward/">Play Soulward <span aria-hidden="true">→</span></a><span class="url">/soulward</span></div>
+<div class="page">
+  <header>
+    <div>
+      <h1>Games by Fahmi <span class="wave" aria-hidden="true">👋</span></h1>
+      <p class="sub">Three little games. Tap one and play, right in your browser.</p>
+      <p class="swipe">Swipe to see all three →</p>
     </div>
-    <div class="gallery" data-game="Soulward">
-      <div class="strip">
-        <figure class="shot"><button type="button"><img src="shots/soulward-home.webp" width="780" height="1688" loading="lazy" alt="Soulward title screen with a lit candle above a stone ward and a Play button"></button><figcaption>Title screen</figcaption></figure>
-        <figure class="shot"><button type="button"><img src="shots/soulward-path.webp" width="780" height="1688" loading="lazy" alt="Choosing how to type and which path to play, with Knight selected and a Play button"></button><figcaption>Choose how you type and a path</figcaption></figure>
-        <figure class="shot"><button type="button"><img src="shots/soulward-play.webp" width="780" height="1688" loading="lazy" alt="A word falling toward a wall of three typed stones while the player types it"></button><figcaption>Typing a falling word onto the wall</figcaption></figure>
-        <figure class="shot"><button type="button"><img src="shots/soulward-boss.webp" width="780" height="1688" loading="lazy" alt="Boss fight against The Ashen Bell, with its attack words falling toward a five-stone wall"></button><figcaption>Boss fight: The Ashen Bell</figcaption></figure>
+  </header>
+
+  <main class="shelf">
+    <article class="card soul">
+      <div class="shots">
+        <button class="frame" type="button" aria-label="Next Soulward screenshot">
+          <img class="on" src="shots/soulward-home.webp" alt="Soulward title screen with a lit candle over a stone ward">
+          <img src="shots/soulward-play.webp" alt="Typing a falling word onto a wall of stones" loading="lazy">
+          <img src="shots/soulward-boss.webp" alt="Boss fight against The Ashen Bell" loading="lazy">
+          <img src="shots/soulward-path.webp" alt="Choosing a path: Pilgrim, Knight or Ashen" loading="lazy">
+        </button>
+        <div class="dots" role="group" aria-label="Soulward screenshots"></div>
       </div>
-      <span class="hint">Tap a screenshot to enlarge</span>
-    </div>
-  </article>
-
-  <article class="work" id="fatil">
-    <div class="about">
-      <p class="kind">Arabic word game</p>
-      <h2>Fatil <span class="ar" lang="ar" dir="rtl">فتيل</span></h2>
-      <p class="lead">Type an Arabic word that contains the two letters before the fuse burns out.</p>
-      <p class="body">Each round shows a pair of letters on the bomb. Find a real Arabic word that contains them, and the fuse resets for the next pair. A hint ghosts a word onto the keyboard when you are stuck. Every word you find is kept in the prompt book.</p>
-      <dl class="spec">
-        <dt>Play</dt><dd>Letter pairs, a burning fuse, three lives</dd>
-        <dt>Input</dt><dd>Built-in Arabic keyboard or your own</dd>
-        <dt>Language</dt><dd>Interface in English or Arabic; words are always Arabic</dd>
-        <dt>Extras</dt><dd>Hints, prompt book, event mode with a leaderboard</dd>
-      </dl>
-      <div class="actions"><a class="play" href="fatil/">Play Fatil <span aria-hidden="true">→</span></a><span class="url">/fatil</span></div>
-    </div>
-    <div class="gallery" data-game="Fatil">
-      <div class="strip">
-        <figure class="shot"><button type="button"><img src="shots/fatil-home.webp" width="780" height="1688" loading="lazy" alt="Fatil title screen with a golden bomb and the name فتيل"></button><figcaption>Title screen</figcaption></figure>
-        <figure class="shot"><button type="button"><img src="shots/fatil-start.webp" width="780" height="1688" loading="lazy" alt="A round in progress: the letters ي and ق on the bomb above an Arabic keyboard"></button><figcaption>A letter pair on the bomb</figcaption></figure>
-        <figure class="shot"><button type="button"><img src="shots/fatil-boom.webp" width="780" height="1688" loading="lazy" alt="The fuse burned out screen listing three words that would have worked"></button><figcaption>When the fuse burns out, you see words that would have worked</figcaption></figure>
+      <div class="info">
+        <div class="top"><h2>Soulward</h2><span class="tag">Typing</span></div>
+        <p class="line">Type the falling words to build your wall. One typo breaks a stone!</p>
+        <a class="play" href="soulward/">Play <span aria-hidden="true">▶</span></a>
       </div>
-      <span class="hint">Tap a screenshot to enlarge</span>
-    </div>
-  </article>
+    </article>
 
-  <article class="work" id="tidekin">
-    <div class="about">
-      <p class="kind">Shared ecosystem</p>
-      <h2>Tidekin</h2>
-      <p class="lead">A tide pool you keep with your friends.</p>
-      <p class="body">Crabs, snails and fish live across the crevice, the shallows and the surf, and the tide keeps moving. Everyone tends the same pool online: hatch eggs, scatter food and look at each animal's genes. The pool keeps running while you are away, and a shared leaderboard tracks who raised what.</p>
-      <dl class="spec">
-        <dt>Play</dt><dd>Chance-driven life sim, played together</dd>
-        <dt>Players</dt><dd>One shared pool for everyone with the link</dd>
-        <dt>Time</dt><dd>Day and night cycle with rising and falling tides</dd>
-        <dt>Extras</dt><dd>Genes, rare animals, pool log, leaderboard</dd>
-      </dl>
-      <div class="actions"><a class="play" href="tidekin/">Play Tidekin <span aria-hidden="true">→</span></a><span class="url">/tidekin</span></div>
-    </div>
-    <div class="gallery" data-game="Tidekin">
-      <div class="strip">
-        <figure class="shot"><button type="button"><img src="shots/tidekin-screen.webp" width="780" height="1180" loading="lazy" alt="Tidekin main screen with the day, tide, oxygen and the pool full of animals"></button><figcaption>The pool at night, with the tide high</figcaption></figure>
-        <figure class="shot"><button type="button"><img src="shots/tidekin-pool.webp" width="732" height="492" loading="lazy" alt="Close-up of the pool: crevice, shallows and surf zones with crabs, snails and fish"></button><figcaption>Crevice, shallows and surf</figcaption></figure>
+    <article class="card fatil">
+      <div class="shots">
+        <button class="frame" type="button" aria-label="Next Fatil screenshot">
+          <img class="on" src="shots/fatil-start.webp" alt="The letters ي and ق on a golden bomb above an Arabic keyboard">
+          <img src="shots/fatil-home.webp" alt="Fatil title screen with a golden bomb" loading="lazy">
+          <img src="shots/fatil-boom.webp" alt="The fuse burned out, showing words that would have worked" loading="lazy">
+        </button>
+        <div class="dots" role="group" aria-label="Fatil screenshots"></div>
       </div>
-      <span class="hint">Tap a screenshot to enlarge</span>
-    </div>
-  </article>
-</main>
+      <div class="info">
+        <div class="top"><h2>Fatil <span class="ar" lang="ar" dir="rtl">فتيل</span></h2><span class="tag">Arabic words</span></div>
+        <p class="line">Find an Arabic word with both letters before the bomb goes off.</p>
+        <a class="play" href="fatil/">Play <span aria-hidden="true">▶</span></a>
+      </div>
+    </article>
 
-<footer class="wrap">
-  <span>© 2026 Fahmi</span>
-  <span>Scores and progress are saved in your own browser.</span>
-</footer>
+    <article class="card tide">
+      <div class="shots">
+        <button class="frame" type="button" aria-label="Next Tidekin screenshot" style="--ar:780/1180">
+          <img class="on" src="shots/tidekin-screen.webp" alt="Tidekin pool full of crabs, snails and fish at high tide">
+          <img class="fit" src="shots/tidekin-pool.webp" alt="Close-up of the crevice, shallows and surf" loading="lazy">
+        </button>
+        <div class="dots" role="group" aria-label="Tidekin screenshots"></div>
+      </div>
+      <div class="info">
+        <div class="top"><h2>Tidekin</h2><span class="tag">With friends</span></div>
+        <p class="line">Raise crabs, snails and fish in a tide pool you share with friends.</p>
+        <a class="play" href="tidekin/">Play <span aria-hidden="true">▶</span></a>
+      </div>
+    </article>
+  </main>
 
-<dialog class="viewer" id="viewer" aria-label="Screenshot viewer">
-  <div class="v-inner">
-    <div class="v-bar"><span id="vCount"></span><button class="v-btn" id="vClose" type="button" aria-label="Close">✕</button></div>
-    <div class="v-stage">
-      <button class="v-btn" id="vPrev" type="button" aria-label="Previous screenshot">←</button>
-      <img id="vImg" alt="">
-      <button class="v-btn" id="vNext" type="button" aria-label="Next screenshot">→</button>
-    </div>
-    <p class="v-cap" id="vCap"></p>
-  </div>
-</dialog>
+  <footer>Made by Fahmi · your scores stay saved in your own browser</footer>
+</div>
 
 <script>
 (() => {
-  const dlg = document.getElementById('viewer');
-  const img = document.getElementById('vImg'), cap = document.getElementById('vCap'), count = document.getElementById('vCount');
-  let set = [], at = 0, opener = null;
-  function render() {
-    const s = set[at];
-    img.src = s.src; img.alt = s.alt; cap.textContent = s.cap;
-    count.textContent = `${s.game} · ${at + 1} of ${set.length}`;
-  }
-  function step(d) { at = (at + d + set.length) % set.length; render(); }
-  document.querySelectorAll('.gallery').forEach(g => {
-    const items = [...g.querySelectorAll('.shot')].map(f => {
-      const i = f.querySelector('img');
-      return { src: i.getAttribute('src'), alt: i.alt, cap: f.querySelector('figcaption').textContent, game: g.dataset.game };
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.card').forEach((card, c) => {
+    const frame = card.querySelector('.frame'), imgs = [...frame.querySelectorAll('img')], dots = card.querySelector('.dots');
+    let at = 0, timer = null;
+    const btns = imgs.map((img, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Screenshot ' + (i + 1));
+      b.addEventListener('click', () => { show(i); restart(); }); dots.append(b); return b;
     });
-    g.querySelectorAll('.shot button').forEach((b, k) => b.addEventListener('click', () => {
-      set = items; at = k; opener = b; render();
-      if (dlg.showModal) dlg.showModal(); else window.open(items[k].src, '_blank');
-    }));
+    function show(i) {
+      at = (i + imgs.length) % imgs.length;
+      imgs.forEach((img, k) => img.classList.toggle('on', k === at));
+      btns.forEach((b, k) => b.setAttribute('aria-current', String(k === at)));
+    }
+    function restart() { clearInterval(timer); if (!still) timer = setInterval(() => show(at + 1), 3200 + c * 400); }
+    frame.addEventListener('click', () => { show(at + 1); restart(); });
+    card.addEventListener('mouseenter', () => clearInterval(timer));
+    card.addEventListener('mouseleave', restart);
+    show(0); restart();
   });
-  document.getElementById('vPrev').addEventListener('click', () => step(-1));
-  document.getElementById('vNext').addEventListener('click', () => step(1));
-  document.getElementById('vClose').addEventListener('click', () => dlg.close());
-  dlg.addEventListener('click', e => { if (e.target === dlg || e.target.classList.contains('v-stage')) dlg.close(); });
-  dlg.addEventListener('close', () => { if (opener) opener.focus(); });
-  dlg.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') step(-1); else if (e.key === 'ArrowRight') step(1); });
-  // swipe between screenshots on phones
-  let x0 = null;
-  img.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
-  img.addEventListener('touchend', e => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); x0 = null; });
 })();
 </script>
 </body>
