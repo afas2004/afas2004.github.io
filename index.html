@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Games · efoc.party</title>
-<meta name="description" content="Small games you can play in the browser: Soulward and Tidekin.">
+<meta name="description" content="Small games you can play in the browser: Soulward, Fatil and Tidekin.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: one narrow column; each game is a row you tap, like a cartridge shelf. */
 :root{
   --bg:#F1EFF6; --surface:#FFFFFF; --ink:#17142A; --muted:#5E5A78; --rule:#D9D5E6; --accent:#5B3FD6;
-  --ember:#C9771E; --shield:#2F5BEA;
+  --ember:#C9771E; --shield:#2F5BEA; --fuse:#C23B4E;
   --display:"Familjen Grotesk",ui-sans-serif,system-ui,sans-serif;
   --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
-  :root{--bg:#0E0C18;--surface:#17142A;--ink:#ECEAF7;--muted:#9E9AB8;--rule:#2B2742;--accent:#A895FF;--ember:#F2B25E;--shield:#8CA7FF;color-scheme:dark}
+  :root{--bg:#0E0C18;--surface:#17142A;--ink:#ECEAF7;--muted:#9E9AB8;--rule:#2B2742;--accent:#A895FF;--ember:#F2B25E;--shield:#8CA7FF;--fuse:#FF7A8A;color-scheme:dark}
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -32,6 +32,7 @@ h1{margin:6px 0 8px;font-size:clamp(2.2rem,8vw,3.2rem);font-weight:700;line-heig
 .game:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .mark{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font-family:var(--mono);font-size:22px;font-weight:500}
 .mark.soul{background:color-mix(in srgb,var(--ember) 16%,transparent);color:var(--ember)}
+.mark.fuse{background:color-mix(in srgb,var(--fuse) 16%,transparent);color:var(--fuse);font-family:var(--display);font-size:26px}
 .mark.tide{background:color-mix(in srgb,var(--shield) 16%,transparent);color:var(--shield)}
 .info{min-width:0;display:flex;flex-direction:column;gap:2px}
 .name{font-size:19px;font-weight:700;letter-spacing:-.01em}
@@ -59,6 +60,17 @@ footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
           <span class="name">Soulward</span>
           <span class="desc">Type each falling word before it breaks your ward.</span>
           <span class="tag">Playable · 3 paths · bosses</span>
+        </span>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+    </li>
+    <li>
+      <a class="game" href="fatil/">
+        <span class="mark fuse" lang="ar" dir="rtl" aria-hidden="true">ف</span>
+        <span class="info">
+          <span class="name">Fatil <span lang="ar" dir="rtl">فتيل</span></span>
+          <span class="desc">Type an Arabic word that contains the two letters before the fuse burns out.</span>
+          <span class="tag">Playable · Arabic words</span>
         </span>
         <span class="go" aria-hidden="true">→</span>
       </a>
